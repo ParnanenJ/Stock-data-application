@@ -8,6 +8,8 @@ const symbol = document.getElementById("symbol");
 const sector = document.getElementById("sector");
 const porssi = document.getElementById("porssi");
 
+const hinta = document.getElementById("hinta");
+
 const lomake = document.getElementById("lomake");
 lomake.addEventListener('submit', function(e) {
     e.preventDefault(); // estää sivun latautumisen
@@ -46,6 +48,9 @@ lomake.addEventListener('submit', function(e) {
 
             // Pörssilistaus
             porssi.textContent = data[0].exchange
+
+            // nykyinen hinta
+            hinta.textContent = data[0].price + " " + data[0].currency
 
         }
     };
