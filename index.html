@@ -12,6 +12,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- ylemmät kortit -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- bootstrap ikoneja -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <body>
     <div class="search-wrapper">
@@ -32,7 +34,8 @@
                     <span>Price searches are limited to AAPL, TSLA, AMZN, MSFT, NVDA, GOOGL, META, NFLX, JPM, V, BAC, AMD, PYPL, DIS, T, PFE,
                          COST, INTC, KO, TGT, NKE, SPY, BA, BABA, XOM, WMT, GE, CSCO, VZ, JNJ, CVX, PLTR, SQ, SHOP, SBUX, SOFI, HOOD, RBLX, 
                          SNAP, AMD, UBER, FDX, ABBV, ETSY, MRNA, LMT, GM, F, RIVN, LCID, CCL, DAL, UAL, AAL, TSM, SONY, ET, NOK, MRO, COIN, RIVN, 
-                         SIRI, SOFI, RIOT, CPRX, PYPL, TGT, VWO, SPYG, NOK, ROKU, HOOD, VIAC, ATVI, BIDU, DOCU, ZM, PINS, TLRY, WBA, VIAC, MGM, NFLX, NIO, C, GS, WFC, ADBE, PEP, UNH, CARR, FUBO, HCA, TWTR, BILI, SIRI, VIAC, FUBO, RKT</span>
+                         SIRI, SOFI, RIOT, CPRX, PYPL, TGT, VWO, SPYG, NOK, ROKU, HOOD, VIAC, ATVI, BIDU, DOCU, ZM, PINS, TLRY, WBA, VIAC, MGM, NFLX, 
+                         NIO, C, GS, WFC, ADBE, PEP, UNH, CARR, FUBO, HCA, TWTR, BILI, SIRI, VIAC, FUBO, RKT</span>
                 </div>
                 <div class="recent-item d-flex align-items-center">
                     <i class="bi bi-clock-history me-2"></i>
@@ -109,7 +112,7 @@
         <div class="container py-4">
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h4 class="mb-0">Dashboard Overview</h4>
+                <h4 class="mb-0">Today's Overview</h4>
             </div>
 
             <!-- Statistics Cards -->
@@ -142,16 +145,16 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="stat-icon bg-success bg-opacity-10 text-success">
-                                    <i class="fas fa-users"></i>
+                                    <i class="bi bi-graph-up-arrow"></i>
                                 </div>
                                 <span class="badge bg-danger trend-badge">
                                         <i class="fas fa-arrow-down me-1"></i>5.2%
                                     </span>
                             </div>
-                            <h6 class="text-muted mb-2">Active Users</h6>
-                            <h4 class="mb-3">14,789</h4>
+                            <h6 class="text-muted mb-2">High</h6>
+                            <h4 class="mb-3" id="ylin">-<!-- Päivän korkein hinta--></h4>
                             <div class="progress">
-                                <div class="progress-bar bg-success" style="width: 65%"></div>
+                                <div class="progress-bar bg-success" style="width: 100%"></div>
                             </div>
                         </div>
                     </div>
@@ -162,17 +165,17 @@
                     <div class="card stat-card border-0 shadow-sm">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="stat-icon bg-warning bg-opacity-10 text-warning">
-                                    <i class="fas fa-box"></i>
+                                <div class="stat-icon bg-danger bg-opacity-10 text-danger">
+                                    <i class="bi bi-graph-down-arrow"></i>
                                 </div>
                                 <span class="badge bg-success trend-badge">
                                         <i class="fas fa-arrow-up me-1"></i>8.4%
                                     </span>
                             </div>
-                            <h6 class="text-muted mb-2">New Orders</h6>
-                            <h4 class="mb-3">1,589</h4>
+                            <h6 class="text-muted mb-2">Low</h6>
+                            <h4 class="mb-3" id="alin">-<!-- Päivän alin hinta--></h4>
                             <div class="progress">
-                                <div class="progress-bar bg-warning" style="width: 85%"></div>
+                                <div class="progress-bar bg-danger" style="width: 100%"></div>
                             </div>
                         </div>
                     </div>

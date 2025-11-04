@@ -65,13 +65,17 @@ lomake.addEventListener('submit', function(e) {
             // Pörssilistaus
             porssi.textContent = data[0].exchange
 
+            // Tallennetaan valuutta
+            valuutta = data[0].currency
+
             // nykyinen hinta
-            hinta.textContent = data[0].price + " " + data[0].currency
+            hinta.textContent = data[0].price + " " + valuutta
             
             // Yrityksen kuvaus
             info.textContent = data[0].description
         }
     };
+    tieto.send(); // Kutsu send() tämän ulkopuolella
 
     // Jos ticker löytyy limited listasta haetaan tarkemmat hintatiedot
     if (limited.includes(syote)){
@@ -82,14 +86,16 @@ lomake.addEventListener('submit', function(e) {
             if (hintaTieto.readyState === 4 && hintaTieto.status === 200) {
                 let hintadata = JSON.parse(hintaTieto.responseText);
 
-                // Yrityksen nimi
-                document.getElementById("aloitushinta").textContent = ${hintadata[0].open};
+                // Päivän avushinta
+                document.getElementById("aloitushinta").textContent = `(Open ${hintadata[0].open} ${valuutta})`;
+                // Päivän Ylin hinta
+                document.getElementById("ylin").textContent = hintadata[0].high + valuutta;
+                // Päivän Alin hinta
+                document.getElementById("alin").textContent = hintadata[0].low + valuutta;
 
             }
         };
         hintaTieto.send();
     }
-
-    tieto.send(); // Kutsu send() tämän ulkopuolella
     
 });
