@@ -30,6 +30,9 @@ lomake.addEventListener('submit', function(e) {
     // Näytetään loppuosa sivusta
     lukko.style.display = "block";
 
+    ///////////////////////////////////////////////////////////
+    // 1 API KUTSU
+
     var tieto = new XMLHttpRequest();
     tieto.open('GET', `https://financialmodelingprep.com/stable/profile?symbol=${syote}&apikey=SNVbYoxdJgjGTpUbtP0U1Hj8eMs1eEtv`, true);
 
@@ -72,6 +75,9 @@ lomake.addEventListener('submit', function(e) {
     };
     tieto.send(); // Kutsu send() tämän ulkopuolella
 
+    ///////////////////////////////////////////////////////////
+    // 2 API KUTSU
+
     // Nollataan rajoitetut tiedot ettei tosen osakkeen tiedot jää näkyviin jos käyttäjä hakee toista osaketta joole ei ole saatavissa hinta tietoja
     document.getElementById("aloitushinta").textContent = "-";
     document.getElementById("ylin").textContent = "-";
@@ -86,6 +92,9 @@ lomake.addEventListener('submit', function(e) {
             if (hintaTieto.readyState === 4 && hintaTieto.status === 200) {
                 let hintadata = JSON.parse(hintaTieto.responseText);
 
+
+                ///////////////////////////////////////////////////////////
+                //TIEDON KERUU
                 // tallennetaan Päivän avushinta
                 avshinta = hintadata[0].open;
                 document.getElementById("aloitushinta").textContent = `(Open ${avshinta} ${valuutta})`;
@@ -94,16 +103,96 @@ lomake.addEventListener('submit', function(e) {
                 // Päivän Alin hinta
                 document.getElementById("alin").textContent = hintadata[0].low + " " + valuutta;
 
+            
+                ///////////////////////////////////////////////////////////
+                // laskut
                 // Lasketaan tuottoprosentti ja muokataan tyyli -/+
                 prosenttilaskut(nykhinta, avshinta, "pricemuutos")
                 prosenttilaskut(nykhinta, avshinta, "maxmuutos")
                 prosenttilaskut(nykhinta, avshinta, "minmuutos")
 
 
+                ///////////////////////////////////////////////////////////
+                //CHART
+
+                // kerätään tiedot hinta charttia varten
+                let endhinnat = []
+                let paivamaarat = []
+                // lisätään vuoden jokainen päivä (ilman la ja su) ja niiden viimeisin hinta listoihin
+                for (const element of hintadata) {
+                    if (paivamaarat.length >= 261) {
+                        break;
+                    }
+                    endhinnat.push(element.close);
+                    paivamaarat.push(element.date);
+                }
+
+                // hinta chart
+                var chartsLine = document.querySelectorAll(".chart-line");
+
+                chartsLine.forEach(function(chart) {
+                if (!chart.getAttribute('data-chart-initialized')) {
+
+                    var ctx = chart.getContext("2d");
+
+                    var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+                    gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+                    gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+
+                    new Chart(ctx, {
+                        type: "line",
+                        // datan lisääminen charttiin
+                        data: {
+                            labels: paivamaarat,
+                            datasets: [{
+                                label: "End ($)",
+                                fill: true,
+                                backgroundColor: gradient,
+                                borderColor: "#007bff",
+                                data: endhinnat,
+                            }]
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            interaction: {
+                                intersect: false
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                filler: {
+                                    propagate: false
+                                }
+                            },
+                            scales: {
+                                // x akselin muokkaus
+                                x: {
+                                    reverse: true,
+                                    grid: {
+                                        display: false
+                                    }
+                                },
+                                // y akselin muokkaus
+                                y: {
+                                    ticks: { stepSize: 10 },
+                                    border: { dash: [3,3] },
+                                    grid: { display: false }
+                                }
+                            }
+                        }
+                    });
+
+                    chart.setAttribute("data-chart-initialized", "true");
+                }
+                });
+
+
+                ///////////////////////////////////////////////////////////
             };
         };
         hintaTieto.send();
-    }
+    };
 
     // Prosenttien laskeminen ja tulostus
 
@@ -123,6 +212,7 @@ lomake.addEventListener('submit', function(e) {
             element.classList.add('bg-danger');
             icon.className = 'fas fa-arrow-down me-1';
         } else {
+            // muokataan tyyli
             element.classList.remove('bg-danger');
             element.classList.add('bg-success');
             icon.className = 'fas fa-arrow-up me-1';
@@ -133,61 +223,4 @@ lomake.addEventListener('submit', function(e) {
     }
 
     
-});
-
-// hinta chart
-var chartsLine = document.querySelectorAll(".chart-line");
-
-chartsLine.forEach(function(chart) {
-  if (!chart.getAttribute('data-chart-initialized')) {
-
-      var ctx = chart.getContext("2d");
-
-      var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-      gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-      gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-
-      new Chart(ctx, {
-          type: "line",
-          data: {
-              labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-              datasets: [{
-                  label: "Sales ($)",
-                  fill: true,
-                  backgroundColor: gradient,
-                  borderColor: "#007bff",
-                  data: [2115,1562,1584,1892,1587,1923,2566,2448,2805,3438,2917,3327]
-              }]
-          },
-          options: {
-              maintainAspectRatio: false,
-              interaction: {
-                  intersect: false
-              },
-              plugins: {
-                  legend: {
-                      display: false
-                  },
-                  filler: {
-                      propagate: false
-                  }
-              },
-              scales: {
-                  x: {
-                      reverse: true,
-                      grid: {
-                          display: false
-                      }
-                  },
-                  y: {
-                      ticks: { stepSize: 10 },
-                      border: { dash: [3,3] },
-                      grid: { display: false }
-                  }
-              }
-          }
-      });
-
-      chart.setAttribute("data-chart-initialized", "true");
-  }
 });
