@@ -26,10 +26,13 @@
             </form>
 
             <div class="recent-searches pt-3">
-                <p class="text-muted mb-3">Most Searched</p>
+                <p class=" mb-3 text-danger">NOTE!</p>
                 <div class="recent-item d-flex align-items-center">
                     <i class="bi bi-clock-history me-2"></i>
-                    <span>AAPL</span>
+                    <span>Price searches are limited to AAPL, TSLA, AMZN, MSFT, NVDA, GOOGL, META, NFLX, JPM, V, BAC, AMD, PYPL, DIS, T, PFE,
+                         COST, INTC, KO, TGT, NKE, SPY, BA, BABA, XOM, WMT, GE, CSCO, VZ, JNJ, CVX, PLTR, SQ, SHOP, SBUX, SOFI, HOOD, RBLX, 
+                         SNAP, AMD, UBER, FDX, ABBV, ETSY, MRNA, LMT, GM, F, RIVN, LCID, CCL, DAL, UAL, AAL, TSM, SONY, ET, NOK, MRO, COIN, RIVN, 
+                         SIRI, SOFI, RIOT, CPRX, PYPL, TGT, VWO, SPYG, NOK, ROKU, HOOD, VIAC, ATVI, BIDU, DOCU, ZM, PINS, TLRY, WBA, VIAC, MGM, NFLX, NIO, C, GS, WFC, ADBE, PEP, UNH, CARR, FUBO, HCA, TWTR, BILI, SIRI, VIAC, FUBO, RKT</span>
                 </div>
                 <div class="recent-item d-flex align-items-center">
                     <i class="bi bi-clock-history me-2"></i>
@@ -111,7 +114,7 @@
 
             <!-- Statistics Cards -->
             <div class="row g-4">
-                <!-- Sales Card -->
+                <!-- Hinta kortti -->
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="card stat-card border-0 shadow-sm">
                         <div class="card-body">
@@ -125,6 +128,7 @@
                             </div>
                             <h6 class="text-muted mb-2">Price</h6>
                             <h4 class="mb-3" id="hinta"><!-- nykyinen hinta --></h4>
+                            <p class="text-muted small mb-0" id="aloitushinta"> <!--Yrityksen kuvaus --> </p>
                             <div class="progress">
                                 <div class="progress-bar bg-primary" style="width: 100%"></div>
                             </div>
@@ -196,37 +200,21 @@
                 </div>
             </div>
 
-            <!-- Activity Section -->
+            <!-- Description Section -->
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h5 class="card-title mb-0">Recent Activity</h5>
-                                <button class="btn btn-light btn-sm">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </button>
+                                <h5 class="card-title mb-0">Description</h5>
                             </div>
                             <div class="list-group list-group-flush">
                                 <div class="list-group-item border-0 d-flex align-items-center px-0">
-                                    <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle p-2 me-3">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1">New order received</h6>
-                                        <p class="text-muted small mb-0">Order #123456 from John Doe</p>
+                                        <p class="text-muted small mb-0" id="info"> <!--Yrityksen kuvaus --> </p>
                                     </div>
-                                    <small class="text-muted">Just now</small>
-                                </div>
-                                <div class="list-group-item border-0 d-flex align-items-center px-0">
-                                    <div class="avatar-sm bg-success bg-opacity-10 rounded-circle p-2 me-3">
-                                        <i class="fas fa-user-plus text-success"></i>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-1">New user registered</h6>
-                                        <p class="text-muted small mb-0">User ID: #987654</p>
-                                    </div>
-                                    <small class="text-muted">2 min ago</small>
+                                    <small class="text-muted"></small>
                                 </div>
                             </div>
                         </div>
