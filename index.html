@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <div class="sisalto" id="lukittu">
+    <!--<div class="sisalto" id="lukittu">-->
 
         <!--NIMI + LOGO-->
 
@@ -119,12 +119,12 @@
                                 <div class="stat-icon bg-primary bg-opacity-10 text-primary">
                                     <i class="fas fa-dollar-sign"></i>
                                 </div>
-                                <span class="badge bg-success trend-badge">
-                                        <i class="fas fa-arrow-up me-1"></i>12.5%
+                                <span class="badge bg-success trend-badge" id="pricemuutos">
+                                        <i class="fas fa-arrow-up me-1"></i>0%
                                     </span>
                             </div>
                             <h6 class="text-muted mb-2">Price</h6>
-                            <h4 class="mb-3" id="hinta"><!-- nykyinen hinta --></h4>
+                            <h4 class="mb-3" id="hinta">-<!-- nykyinen hinta --></h4>
                             <p class="text-muted small mb-0" id="aloitushinta"> <!--Yrityksen kuvaus --> </p>
                             <div class="progress">
                                 <div class="progress-bar bg-primary" style="width: 100%"></div>
@@ -141,8 +141,8 @@
                                 <div class="stat-icon bg-success bg-opacity-10 text-success">
                                     <i class="bi bi-graph-up-arrow"></i>
                                 </div>
-                                <span class="badge bg-danger trend-badge">
-                                        <i class="fas fa-arrow-down me-1"></i>5.2%
+                                <span class="badge bg-success trend-badge" id="maxmuutos">
+                                        <i class="fas fa-arrow-up me-1"></i>0%
                                     </span>
                             </div>
                             <h6 class="text-muted mb-2">High</h6>
@@ -162,8 +162,8 @@
                                 <div class="stat-icon bg-danger bg-opacity-10 text-danger">
                                     <i class="bi bi-graph-down-arrow"></i>
                                 </div>
-                                <span class="badge bg-success trend-badge">
-                                        <i class="fas fa-arrow-up me-1"></i>8.4%
+                                <span class="badge bg-success trend-badge" id="minmuutos">
+                                        <i class="fas fa-arrow-up me-1"></i>0%
                                     </span>
                             </div>
                             <h6 class="text-muted mb-2">Low</h6>
@@ -218,7 +218,20 @@
         </div>
     
     </div>
-   
+
+    <!-- hinta chart -->
+    <div class="container py-4">
+        <div class="card flex-fill w-100 draggable">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Recent Movement</h5>
+            </div>
+            <div class="card-body py-3">
+                <div class="chart chart-sm"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="chartjs-dashboard-line" style="display: block; height: 252px; width: 428px;" width="856" height="504" class="chart-line chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <footer class="footer text-center">
         <div class="container">
@@ -226,7 +239,11 @@
             <p>by Jiro Pärnänen</p>
         </div>
     </footer>
+    <!-- taulukolle js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Oma js -->
     <script src="script.js"></script>
+    <!-- Bootstrat js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
