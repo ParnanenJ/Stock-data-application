@@ -150,6 +150,12 @@ body {
     font-weight: bold;
 }
 
+
+.alasveto {
+    align-content: end;
+}
+
+
 /* footer */
 .footer {
     border-top: #4b5563 solid;

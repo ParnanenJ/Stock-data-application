@@ -129,7 +129,7 @@ lomake.addEventListener('submit', function(e) {
                 
                 // lisätään vuoden jokainen päivä (ilman la ja su) ja niiden viimeisin hinta listoihin
                 for (const element of hintadata) {
-                    if (paivamaarat.length >= 261) {
+                    if (paivamaarat.length >= 260) {
                         break;
                     }
                     endhinnat.push(element.close);
@@ -162,6 +162,26 @@ lomake.addEventListener('submit', function(e) {
         };
         hintaTieto.send();
     };
+});
+
+///////////////////////////////////////////////////////////
+    // Alasvetovalikon toiminnallisuus
+
+const alasveto = document.getElementById("alasveto");
+
+alasveto.addEventListener("change", function(){
+    const arvo = Number(alasveto.value);
+
+    const pv = paivamaarat.slice(0, arvo);
+    const hinnat = endhinnat.slice(0, arvo);
+
+    taulukonLuonti(pv, hinnat);
+});
+
+
+
+
+
     ///////////////////////////////////////////////////////////
     // Prosenttien laskeminen ja tulostus
 
@@ -256,4 +276,3 @@ lomake.addEventListener('submit', function(e) {
             });
         });
     }
-});
