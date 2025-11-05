@@ -14,6 +14,8 @@ const limited = [
   "TWTR", "BILI", "RKT"
 ];
 
+
+
 const logo = document.getElementById("logo");
 
 const lomake = document.getElementById("lomake");
@@ -26,6 +28,7 @@ lomake.addEventListener('submit', function(e) {
         alert("Kenttä ei voi olla tyhjä!");
         return;
     }
+
 
     // Näytetään loppuosa sivusta
     lukko.style.display = "block";
@@ -78,6 +81,12 @@ lomake.addEventListener('submit', function(e) {
     ///////////////////////////////////////////////////////////
     // 2 API KUTSU
 
+    // kerätään tiedot hinta charttia varten
+    endhinnat = [];
+    paivamaarat = [];
+    endhinnat.length = 0;
+    paivamaarat.length = 0;
+
     // Nollataan rajoitetut tiedot ettei tosen osakkeen tiedot jää näkyviin jos käyttäjä hakee toista osaketta joole ei ole saatavissa hinta tietoja
     document.getElementById("aloitushinta").textContent = "-";
     document.getElementById("ylin").textContent = "-";
@@ -117,9 +126,7 @@ lomake.addEventListener('submit', function(e) {
                 ///////////////////////////////////////////////////////////
                 //CHART
 
-                // kerätään tiedot hinta charttia varten
-                let endhinnat = []
-                let paivamaarat = []
+                
                 // lisätään vuoden jokainen päivä (ilman la ja su) ja niiden viimeisin hinta listoihin
                 for (const element of hintadata) {
                     if (paivamaarat.length >= 261) {
@@ -133,7 +140,10 @@ lomake.addEventListener('submit', function(e) {
                 var chartsLine = document.querySelectorAll(".chart-line");
 
                 chartsLine.forEach(function(chart) {
-                if (!chart.getAttribute('data-chart-initialized')) {
+                    // Jos chart on jo olemassa, tuhotaan se
+                    if (chart.chart) {
+                        chart.chart.destroy();
+                    }
 
                     var ctx = chart.getContext("2d");
 
@@ -141,52 +151,9 @@ lomake.addEventListener('submit', function(e) {
                     gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
                     gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
 
-                    new Chart(ctx, {
-                        type: "line",
-                        // datan lisääminen charttiin
-                        data: {
-                            labels: paivamaarat,
-                            datasets: [{
-                                label: "End ($)",
-                                fill: true,
-                                backgroundColor: gradient,
-                                borderColor: "#007bff",
-                                data: endhinnat,
-                            }]
-                        },
-                        options: {
-                            maintainAspectRatio: false,
-                            interaction: {
-                                intersect: false
-                            },
-                            plugins: {
-                                legend: {
-                                    display: false
-                                },
-                                filler: {
-                                    propagate: false
-                                }
-                            },
-                            scales: {
-                                // x akselin muokkaus
-                                x: {
-                                    reverse: true,
-                                    grid: {
-                                        display: false
-                                    }
-                                },
-                                // y akselin muokkaus
-                                y: {
-                                    ticks: { stepSize: 10 },
-                                    border: { dash: [3,3] },
-                                    grid: { display: false }
-                                }
-                            }
-                        }
-                    });
-
-                    chart.setAttribute("data-chart-initialized", "true");
-                }
+                    // Luodaan uusi chart
+                    taulukonLuonti(paivamaarat, endhinnat);
+                    
                 });
 
 
@@ -222,7 +189,71 @@ lomake.addEventListener('submit', function(e) {
 
         // asetetaan luku i-elementin perään
         element.innerHTML = `<i class="${icon.className}"></i> ${muutos.toFixed(2)}%`;
-    }
+    };
 
-    
+
+    ///////////////////////////////////////////////////////////
+    // Taulukon luonti funktio
+    // Taulukon luonti funktio
+    function taulukonLuonti(pv, hinta) {
+        // Hinta chart
+        var chartsLine = document.querySelectorAll(".chart-line");
+
+        chartsLine.forEach(function(chart) {
+            // Jos chart on jo olemassa, tuhotaan se
+            if (chart.chart) {
+                chart.chart.destroy();
+            }
+
+            var ctx = chart.getContext("2d");
+
+            var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+            gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+            gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+
+            // Luodaan uusi chart
+            chart.chart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: pv,
+                    datasets: [{
+                        label: "End ($)",
+                        fill: false,           // HUOM: jos fill = true, viiva saattaa piiloutua gradientin alle
+                        backgroundColor: gradient,
+                        borderColor: "#007bff",
+                        data: hinta,
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        hitRadius: 10
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',    // Hover seuraa x-akselin mukaista datapistettä
+                        axis: 'x',        // Pystysuora viiva
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        filler: { propagate: false },
+                        tooltip: {
+                            enabled: true,
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `Hinta: ${context.raw} $`; // Näyttää hintatiedot hoverissa
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { reverse: true, grid: { display: false } },
+                        y: { ticks: { stepSize: 10 }, border: { dash: [3, 3] }, grid: { display: false } }
+                    }
+                }
+            });
+        });
+    }
 });
