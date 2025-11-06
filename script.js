@@ -1,6 +1,6 @@
 const lukko = document.getElementById("lukittu");
 // Näytetään aluksi pelkkä tiedonhaku palkki
-//lukko.style.display = "none";
+lukko.style.display = "none";
 
 const limited = [
   "AAPL", "TSLA", "AMZN", "MSFT", "NVDA", "GOOGL", "META", "NFLX", "JPM", "V",
@@ -14,7 +14,32 @@ const limited = [
   "TWTR", "BILI", "RKT"
 ];
 
+///////////////////////////////////////////////////////////
+// INFONAPIN LISÄYS
+const infobtn = document.getElementById("infobtn");
+const infotext = document.getElementById("infotext");
+// Aluksi infoteksti pois näkyvistä
+infotext.style.display = "none";
 
+// Näytetään infoteksti nappia klikkaamalla ja muutetaan nuoli ikoni
+infobtn.addEventListener("click", function(){
+    const icon = infobtn.querySelector("i");
+
+    // Näytetään teskti
+    if (infotext.style.display === "none"){
+        infotext.style.display = "block";
+        icon.classList.remove("bi-caret-down-fill");
+        icon.classList.add("bi-caret-up-fill");
+        
+    // Poistetaan teksti näkyvistä
+    } else {
+        infotext.style.display = "none";
+        icon.classList.remove("bi-caret-up-fill");
+        icon.classList.add("bi-caret-down-fill");
+    }
+});
+
+///////////////////////////////////////////////////////////
 
 const logo = document.getElementById("logo");
 
@@ -42,7 +67,6 @@ lomake.addEventListener('submit', function(e) {
 
             if (data.length === 0){
                 lukko.style.display = "none";
-                alert("No stocks found");
                 document.getElementById("error").innerHTML = "No stocks found"
                 return;
             }
@@ -87,7 +111,7 @@ lomake.addEventListener('submit', function(e) {
              document.getElementById("info").textContent = data[0].description;
         }
     };
-    tieto.send(); // Kutsu send() tämän ulkopuolella
+    tieto.send(); // Kutsu
 
     ///////////////////////////////////////////////////////////
     // 2 API KUTSU

@@ -29,10 +29,11 @@
             </form>
 
             <div class="recent-searches pt-3">
-                <p class=" mb-3 text-danger">NOTE!</p>
-                <i class="bi bi-exclamation-circle-fill text-danger bf-danger"></i>
+                <button id="infobtn" type="button" class="btn infobtn">Search Info <i class="bi-caret-down-fill"></i></button>
+                <i class="bi bi-exclamation-circle-fill text-warning"></i>
                 <div class="recent-item d-flex align-items-center">
-                    <span>Price searches are limited to AAPL, TSLA, AMZN, MSFT, NVDA, GOOGL, META, NFLX, JPM, V, BAC, AMD, PYPL, DIS, T, PFE,
+
+                    <span id="infotext">Price searches are limited to AAPL, TSLA, AMZN, MSFT, NVDA, GOOGL, META, NFLX, JPM, V, BAC, AMD, PYPL, DIS, T, PFE,
                          COST, INTC, KO, TGT, NKE, SPY, BA, BABA, XOM, WMT, GE, CSCO, VZ, JNJ, CVX, PLTR, SQ, SHOP, SBUX, SOFI, HOOD, RBLX, 
                          SNAP, AMD, UBER, FDX, ABBV, ETSY, MRNA, LMT, GM, F, RIVN, LCID, CCL, DAL, UAL, AAL, TSM, SONY, ET, NOK, MRO, COIN, RIVN, 
                          SIRI, SOFI, RIOT, CPRX, PYPL, TGT, VWO, SPYG, NOK, ROKU, HOOD, VIAC, ATVI, BIDU, DOCU, ZM, PINS, TLRY, WBA, VIAC, MGM, NFLX, 
@@ -42,6 +43,7 @@
         </div>
     </div>
 
+    <!--Piilotetaan sisältö ennen kuin haku on tehty-->
     <div id="lukittu">
 
         <!--NIMI + LOGO-->
