@@ -3,7 +3,7 @@ Jiro Pärnänen
 
 ## Verkkolinkit:
 Pääset julkaistuun sovellukseen käsiksi osoitteessa [Github.io](https://parnanenj.github.io/Stock-data-application/) tai [netlify.app](https://parnanenj.github.io/Financial-Share-Application/)  
-Linkki projektin videoesittelyyn [google.com](https://google.com)
+Linkki projektin videoesittelyyn [video.laurea.fi](https://video.laurea.fi/media/Javascript%20(Projekti%202%20esittely)/0_r9a9xm65)
 
 ## Oma arvio työstä ja oman osaamisen kehittymisestä
 Mielestäni onnistuin toteuttamaan sovelluksen erittäin hyvin käyttäen Financialmodelingprep:n apia. Myös ulkoasua ja muu tekninen puoli onnistui erittäin hyvin.
