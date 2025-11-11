@@ -3,7 +3,7 @@ Jiro Pärnänen
 
 ## Verkkolinkit:
 Pääset julkaistuun sovellukseen käsiksi osoitteessa [Github.io](https://parnanenj.github.io/Stock-data-application/) tai [netlify.app](https://parnanenj.github.io/Financial-Share-Application/)  
-Linkki projektin videoesittelyyn [google.com](https://google.com)
+Linkki projektin videoesittelyyn [video.laurea.fi](https://video.laurea.fi/media/Javascript%20(Projekti%202%20esittely)/0_r9a9xm65)
 
 ## Oma arvio työstä ja oman osaamisen kehittymisestä
 Mielestäni onnistuin toteuttamaan sovelluksen erittäin hyvin käyttäen Financialmodelingprep:n apia. Myös ulkoasua ja muu tekninen puoli onnistui erittäin hyvin.
@@ -62,6 +62,7 @@ Lista lähteistä ja esimerkeistä, joita käytin projektin aikana.
 - [Mishti](https://bootstrapexamples.com/@mishti/stats-card-made-with-boostrap-4-6)
 - [Aisha Bello](https://bootstrapexamples.com/@aisha-bello/dashboard-statistics-cards)  
 - [Loople](https://www.loopple.com/components/bootstrap/charts?page=2)
+- [FMP](https://site.financialmodelingprep.com/developer/docs)  
 - Projektissa on hyödynnetty ChatGPT:ä koodin tarkistukseen ja virheiden kojaaamiseen.
 
 ## Lisenssi
