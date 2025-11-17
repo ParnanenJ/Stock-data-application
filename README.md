@@ -43,12 +43,13 @@ Sisältö:
 [Puhelinmen käyttöliittymä (video)](https://video.laurea.fi/media/t/0_bzvj2gf5)
 
 ## Teknologiat 
-Käytin seuraavia teknologioita: `html`, `css`, `javascript` ja `bootstrap`.  
+Käytin seuraavia teknologioita: `html`, `css`, `javascript`, `FMP:n API` ja `bootstrap`.  
 Teknologioita käytettiin seuraavasti:  
 `html`: luotiin sovelluksen käyttöliittymän perusrakenne  
 `bootstrap`: määritettiin tyylit käyttöliittymälle  
 `css`: muokattiin tai tarkennettiin tyylejä  
-`javascript`: lisättiin kaikki toiminnallisuus sovelluskelle
+`javascript`: lisättiin kaikki toiminnallisuus sovelluskelle  
+`FMP:n API`: haetaan osakkeiden tietoja ja dataa
 
 ## Asennus  
 - lataa kaikki tiedostot ja avaa index.html selaimessasi  
